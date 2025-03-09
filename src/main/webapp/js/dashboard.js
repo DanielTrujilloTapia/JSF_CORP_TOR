@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${employee.apellidos}</td>
                 <td>${employee.puesto || "N/A"}</td>
                 <td>${employee.salario}</td>
-                <td>${employee.fecha_contratacion}</td>
+                <td>${formatDate(employee.fecha_contratacion)}</td> <!-- Aquí usamos formatDate -->
                 <td>${employee.telefono || "N/A"}</td>
                 <td>${employee.correo || "N/A"}</td>
                 <td>${employee.estado || "N/A"}</td>
@@ -67,6 +67,23 @@ document.addEventListener("DOMContentLoaded", function () {
             li.appendChild(a);
             pagination.appendChild(li);
         }
+    }
+
+    function formatDate(date) {
+        if (!date) return ''; // Si no hay fecha, retorna una cadena vacía
+
+        // Asegúrate de que el valor sea un objeto Date
+        if (!(date instanceof Date)) {
+            date = new Date(date); // Intenta convertirlo a Date si no lo es
+        }
+
+        // Extrae día, mes y año
+        const day = String(date.getDate()).padStart(2, '0'); // Asegura 2 dígitos
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
+        const year = date.getFullYear();
+
+        // Retorna la fecha en formato dd/mm/yyyy
+        return `${day}/${month}/${year}`;
     }
 
     window.deleteEmployee = async function (id) {
