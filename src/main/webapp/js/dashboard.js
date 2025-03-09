@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const apiUrl = "https://api-corp-tort.onrender.com/empleados/get_empleados";
     const tableBody = document.getElementById("employeeTable");
     const pagination = document.getElementById("pagination");
-    const itemsPerPage = 10;
+    const itemsPerPage = 6;
     let employees = [];
     let currentPage = 1;
 
@@ -24,18 +24,17 @@ document.addEventListener("DOMContentLoaded", function () {
         paginatedEmployees.forEach(employee => {
             const row = document.createElement("tr");
             row.setAttribute("data-id", employee.id_empleado); // Agregamos un atributo para identificar la fila
-            row.innerHTML = `
-                <td>${employee.id_empleado}</td>
+            row.innerHTML = ` 
                 <td>${employee.nombre}</td>
                 <td>${employee.apellidos}</td>
                 <td>${employee.puesto || "N/A"}</td>
                 <td>${employee.salario}</td>
-                <td>${formatDate(employee.fecha_contratacion)}</td> <!-- Aquí usamos formatDate -->
-                <td>${employee.telefono || "N/A"}</td>
+                <td class="text-sm-center">${formatDate(employee.fecha_contratacion)}</td> <!-- Aquí usamos formatDate -->
+                <td class="text-sm-center">${employee.telefono || "N/A"}</td>
                 <td>${employee.correo || "N/A"}</td>
-                <td>${employee.estado || "N/A"}</td>
-                <td>
-                    <button class="btn btn-warning btn-sm" onclick="editEmployee(${employee.id_empleado})">Editar</button>
+                <td class="text-sm-center">${employee.estado || "N/A"}</td>
+                <td class="text-sm-center">
+                    <button class="btn btn-warning btn-sm"onclick="editEmployee(${employee.id_empleado})">Editar</button>
                     <button class="btn btn-danger btn-sm" onclick="deleteEmployee(${employee.id_empleado})">Eliminar</button>
                 </td>
             `;
